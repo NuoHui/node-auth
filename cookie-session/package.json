@@ -1,0 +1,22 @@
+{
+  "name": "cookie-session",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ioredis": "^4.14.1",
+    "koa": "^2.8.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-session2": "^2.2.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  }
+}
