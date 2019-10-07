@@ -4,14 +4,14 @@ const bodyParser = require("koa-bodyparser");
 const md5 = require("crypto-js/md5");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const User = require("./models/user.js.js");
-const config = require("./config.js.js");
+const User = require("./models/user.js");
+const config = require("./config.js");
 
 const app = new Koa();
 const router = new Router();
 
 mongoose.connect(config.db, { useUnifiedTopology: true });
-// app.set("superSecret", config.secret); // 设置secret
+
 app.use(bodyParser());
 
 /**
@@ -139,7 +139,7 @@ router.get(
           });
         } else {
           ctx.decoded = decoded;
-          next();
+          await next();
         }
       });
     } else {
@@ -153,10 +153,10 @@ router.get(
   async (ctx, next) => {
     try {
       const { id } = ctx.decoded;
-      const { name, isAdmin, age } = await User.findOne({ _id: id });
+      const { name, age, isAdmin } = await User.findOne({ _id: id });
       ctx.body = {
         success: true,
-        data: {name, isAdmin, age}
+        data: { name, age, isAdmin }
       };
     } catch (error) {
       ctx.body = {
